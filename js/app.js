@@ -5,14 +5,11 @@ $(document).ready(function () {
     const adminUsers = ["admin"];
 
     Login = function () {
-        var username = $("#emailId").val();
-        if(!username){
-            alert("Please enter name!!");
-            return;
-        }
-        $("#resetSeat").css('visibility', 'hidden');
+        const username = $("#emailId").val();
+        const seatResetElement = $("#resetSeat");
+        seatResetElement.css('visibility', 'hidden');
         if(adminUsers.indexOf(username) > -1) {
-            $("#resetSeat").css('visibility', 'visible');
+            seatResetElement.css('visibility', 'visible');
         }
         $("#seatStructure").css('pointer-events', 'auto');
         $("h5").html(`Welcome ${username} <br/>You can start booking your seats.<br/>Click on your existing bookings to cancel them.`);
@@ -21,13 +18,24 @@ $(document).ready(function () {
     };
 
     ResetBooking = function() {
-        firebase.remove();
+        firebase.on('value', snapshot => {
+            snapshot.forEach(child => {
+                const childValues = child.val();
+                const i = childValues.locX;
+                const j = childValues.locY;
+                firebase.child(`seat${i}${j}`).set({
+                    vacancy: 0,
+                    name: "",
+                    locX: i,
+                    locY: j
+                });
+            });
+        });
         window.location.reload();
     }
 
     setupSeats();
     showSeats("");
-
 
     function setupSeats() {
         // 0 - unbooked seat
@@ -82,9 +90,9 @@ $(document).ready(function () {
                 if(seatName) {
                     userCounter[seatName] = userCounter[seatName] ? userCounter[seatName] + 1 : 1;
                 }
+                $(id).attr('src', 'images/none.png');
+                $(id).attr('style', "cursor: pointer");
                 if(username) {
-                    $(id).attr('src', 'images/none.png');
-                    $(id).attr('style', "cursor: pointer");
                     if (seatName == username && allSeats[key].vacancy == 1) {
                         $(id).attr('src', 'images/selected.png');
                         $(id).attr('style', "cursor: pointer");
