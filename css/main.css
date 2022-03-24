@@ -4,8 +4,7 @@ img{
     height: 23px;
 }
 
-#seatStructure{ 
-    /* visibility: hidden; */
+#seatStructure{
     pointer-events: none;
 }
 

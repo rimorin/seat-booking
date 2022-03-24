@@ -6,7 +6,6 @@ $(document).ready(function () {
 
     const adminUsers = ["admin"];
 
-
     Login = function () {
 
         var username = $("#emailId").val();

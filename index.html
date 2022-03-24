@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>Realtime KH Seat Booking</title>
 	<link rel="stylesheet" href="css/semantic.min.css" />
 	<link rel="stylesheet" href="css/main.css" />
-
 	<script src="js/jquery.min.js"></script>
 	<script src="js/semantic.min.js"></script>
 	<script src="js/angular.min.js"></script>
@@ -15,33 +13,40 @@
 	<script src="js/app.js"></script>
 </head>
 <body>
-	<div class="ui container">
-		<div class="ui pointing menu">
-			<a class="active item">Home</a>
-			<a id="resetSeat" class="item" onclick="ResetBooking()">Reset Seats</a>
-		</div>
-		<div class="ui action input centerme">
-			<input id="emailId" type="text" placeholder="Name or Family">
-			<button class="ui primary button" onclick="Login()">Login</button>
-		</div>
-		<div id="seatStructure" class="ui raised very text padded container segment">
-			<h2 class="ui header centerme">Woodlands 11 Seats Booking</h2>
-			<h3 id="userHeader" class="ui header centerme"></h2>
+<div class="ui container">
+	<div class="ui pointing menu">
+		<a class="active item">Home</a>
+		<a id="resetSeat" class="item" onclick="ResetBooking()">Reset Seats</a>
+	</div>
+	<div class="ui action input centerme">
+		<select name="emailId" id="emailId">
+			<option value="fs-group-1">Group 1</option>
+			<option value="fs-group-2">Group 2</option>
+			<option value="fs-group-3">Group 3</option>
+			<option value="fs-group-indo">Bahasa</option>
+			<option value="fs-group-tamil">Tamil</option>
+			<option value="admin">Admin</option>
+		  </select>
+		<button class="ui primary button" onclick="Login()">Login</button>
+	</div>
+	<div id="seatStructure" class="ui raised very text padded container segment">
+		<h2 class="ui header centerme">Woodlands 11 Booking</h2>
+		<h3 id="userHeader" class="ui header centerme"></h2>
+		<p>
+			<div id="seats" class="centerme"></div>
+		</p>
+		<div>
 			<p>
-				<div id="seats" class="centerme"></div>
+				<img src="images/none.png" />Available Seat(s)
 			</p>
-			<div>
-				<p>
-					<img src="images/none.png" />Available Seat(s)
-				</p>
-				<p>
-					<img src="images/selected.png" />Selected Seat(s)
-				</p>
-				<p>
-					<img src="images/booked.png" />Booked Seat(s)
-				</p>
-			</div>
+			<p>
+				<img src="images/selected.png" />Selected Seat(s)
+			</p>
+			<p>
+				<img src="images/booked.png" />Booked Seat(s)
+			</p>
 		</div>
+	</div>
 </div>
 </body>
 </html>
