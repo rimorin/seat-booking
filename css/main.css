@@ -1,0 +1,22 @@
+img{
+    margin: 2px;
+    width: 23px;
+    height: 23px;
+}
+
+#seatStructure{ 
+    /* visibility: hidden; */
+    pointer-events: none;
+}
+
+#resetSeat{ 
+    visibility: hidden;
+}
+
+.centerme{
+    position:relative;
+    left:50%;
+    right: -50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
