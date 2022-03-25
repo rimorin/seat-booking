@@ -13,21 +13,20 @@
 	<script src="js/app.js"></script>
 </head>
 <body>
-<div class="ui container">
 	<div class="ui pointing menu">
 		<a class="active item">Home</a>
 		<a id="resetSeat" class="item" onclick="ResetBooking()">Reset Seats</a>
 	</div>
 	<div class="ui action input centerme">
-		<select name="emailId" id="emailId">
+		<select id="groupId" class="ui dropdown">
 			<option value="fs-group-1">Group 1</option>
 			<option value="fs-group-2">Group 2</option>
 			<option value="fs-group-3">Group 3</option>
 			<option value="fs-group-indo">Bahasa</option>
 			<option value="fs-group-tamil">Tamil</option>
 			<option value="admin">Admin</option>
-		  </select>
-		<button id="loginBtn" class="ui primary button" onclick="Login()">Login</button>
+			</select>
+		<button id="loginBtn" class="ui button" onclick="Login()">Login</button>
 	</div>
 	<div id="seatStructure" class="ui raised very text padded container segment">
 		<h3 class="ui header centerme">Woodlands 11 Seat Booking</h2>
@@ -47,9 +46,6 @@
 			</p>
 		</div>
 	</div>
-	<div id="seatStats" class="ui raised very text padded container segment">
-		
-	</div>
-</div>
+	<div id="seatStats" class="ui raised very text padded container segment"></div>
 </body>
 </html>

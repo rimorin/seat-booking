@@ -3,18 +3,20 @@ $(document).ready(function () {
     const firebaseURL = "https://seat-booking-5f1b9-default-rtdb.firebaseio.com/";
     const firebase = new Firebase(firebaseURL);
     const adminUsers = ["admin"];
+    const numberOfRows = 5;
+    const numberOfSeatsPerRow = 10;
 
     Login = function () {
-        const username = $("#emailId").val();
+        const groupId = $("#groupId").val();
         const seatResetElement = $("#resetSeat");
         seatResetElement.css('visibility', 'hidden');
-        if(adminUsers.indexOf(username) > -1) {
+        if(adminUsers.indexOf(groupId) > -1) {
             seatResetElement.css('visibility', 'visible');
         }
         $("#seatStructure").css('pointer-events', 'auto');
-        $("h5").html(`Welcome ${username} <br/>You can start booking your seats.<br/>Click on your existing bookings to cancel them.`);
-        showSeats(username);
-        $("#emailId, #loginBtn").prop("disabled", true);
+        $("h5").html(`Welcome ${groupId} <br/>You can start booking your seats.<br/>Click on your existing bookings to cancel them.`);
+        $("#groupId, #loginBtn").prop("disabled", true);
+        showSeats(groupId);
     };
 
     ResetBooking = function() {
@@ -42,17 +44,17 @@ $(document).ready(function () {
         // 1 - booked seat
         let contentString = "";
         // To load all the seats
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < numberOfRows; i++) {
             contentString += "<div>"
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < numberOfSeatsPerRow; j++) {
                 contentString += "<img id='seat" + i + j + "' src='images/none.png' />";
             }
             contentString += "</div>";
         }
         $("#seats").html(contentString);
 
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
+        for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfSeatsPerRow; j++) {
                 $('#seats').on('click', '#seat' + i + j, function () {
 
                     let string = 'seat' + i + j;
@@ -63,7 +65,7 @@ $(document).ready(function () {
                     else if ($('#seat' + i + j).attr('src') == 'images/none.png') {
                         firebase.child(string).set({
                             vacancy: 1,
-                            name: $("#emailId").val(),
+                            name: $("#groupId").val(),
                             locX: i,
                             locY: j
                         });
