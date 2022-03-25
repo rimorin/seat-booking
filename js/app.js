@@ -1,10 +1,11 @@
-$(document).ready(function () {
 
-    const firebaseURL = "https://seat-booking-5f1b9-default-rtdb.firebaseio.com/";
+$(document).ready(function () {
     const firebase = new Firebase(firebaseURL);
     const adminUsers = ["admin"];
     const numberOfRows = 5;
     const numberOfSeatsPerRow = 10;
+    const params = new window.URLSearchParams(window.location.search);
+    const groupMaster = params.get("group") ? params.get("group") : defaultGroupMaster;
 
     Login = function () {
         const groupId = $("#groupId").val();
@@ -25,7 +26,7 @@ $(document).ready(function () {
                 const childValues = child.val();
                 const i = childValues.locX;
                 const j = childValues.locY;
-                firebase.child(`seat${i}${j}`).set({
+                firebase.child(groupMaster).child(`seat${i}${j}`).set({
                     vacancy: 0,
                     name: "",
                     locX: i,
@@ -38,6 +39,20 @@ $(document).ready(function () {
 
     setupSeats();
     showSeats("");
+    setupGroups();
+
+    function setupGroups() {
+        const groupElement = $("#groupId");
+        for (const [key, value] of groupMapping.entries()) {
+            groupElement.append($('<option>', {
+                value: key,
+                text: value
+            }));
+        }
+
+        const groupHeader = $("#groupHeader");
+        groupHeader.append(` (${groupMaster})`);
+    }
 
     function setupSeats() {
         // 0 - unbooked seat
@@ -63,14 +78,14 @@ $(document).ready(function () {
                         // Do nothing
                     }
                     else if ($('#seat' + i + j).attr('src') == 'images/none.png') {
-                        firebase.child(string).set({
+                        firebase.child(groupMaster).child(string).set({
                             vacancy: 1,
                             name: $("#groupId").val(),
                             locX: i,
                             locY: j
                         });
                     } else {
-                        firebase.child(string).set({
+                        firebase.child(groupMaster).child(string).set({
                             vacancy: 0,
                             name: "",
                             locX: i,
@@ -84,7 +99,7 @@ $(document).ready(function () {
 
     function showSeats(username) {
         firebase.on("value", function (snapshot) {
-            const allSeats = (snapshot.val());
+            const allSeats = (snapshot.val()[groupMaster]);
             let userCounter = {};
             for (var key in allSeats) {
                 let id = "#seat" + allSeats[key].locX + allSeats[key].locY;
