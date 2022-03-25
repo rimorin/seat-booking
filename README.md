@@ -1,8 +1,10 @@
 # Realtime Seat Booking
 
+https://user-images.githubusercontent.com/40650158/160035485-911a4d20-bac0-4501-8edd-424a312f41e2.mov
+
 ## Setup Instructions:
 
-   - Create firebase project
+   - Create a Firebase project
    - Setup Realtime database
    - Set public read and write access
    - Copy generated firebase realtime db url and paste in `firebaseURL` constant variable.
