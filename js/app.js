@@ -2,7 +2,7 @@
 $(document).ready(function () {
     const firebase = new Firebase(firebaseURL);
     const adminUsers = ["admin"];
-    const numberOfRows = 5;
+    const numberOfRows = 10;
     const numberOfSeatsPerRow = 10;
     const params = new window.URLSearchParams(window.location.search);
     const groupMaster = params.get("group") ? params.get("group") : defaultGroupMaster;
