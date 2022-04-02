@@ -23,14 +23,18 @@ $(document).ready(function () {
     ResetBooking = function() {
         firebase.on('value', snapshot => {
             snapshot.forEach(child => {
-                const childValues = child.val();
-                const i = childValues.locX;
-                const j = childValues.locY;
-                firebase.child(groupMaster).child(`seat${i}${j}`).set({
-                    vacancy: 0,
-                    name: "",
-                    locX: i,
-                    locY: j
+                const childKey = child.key();
+                if(childKey != groupMaster) return;
+                const childValue = child.val();
+                Object.entries(childValue).forEach(([_, childValues]) => {
+                    const i = childValues.locX;
+                    const j = childValues.locY;
+                    firebase.child(groupMaster).child(`seat${i}${j}`).set({
+                        vacancy: 0,
+                        name: "",
+                        locX: i,
+                        locY: j
+                    });
                 });
             });
         });
