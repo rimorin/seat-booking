@@ -1,6 +1,7 @@
 # Realtime Seat Booking
 
-https://user-images.githubusercontent.com/40650158/160035485-911a4d20-bac0-4501-8edd-424a312f41e2.mov
+https://user-images.githubusercontent.com/40650158/162551175-aca20f36-1401-4abf-8025-6f54ae16eeac.mov
+
 
 ## Setup Instructions:
 
